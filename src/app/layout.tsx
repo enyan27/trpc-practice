@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { TRPCReactProvider } from "./trpc/client";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -13,10 +14,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(font.className, "antialiased")}>
-        <ThemeProvider>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <TRPCReactProvider>
+          <ThemeProvider>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
