@@ -26,12 +26,8 @@ function getQueryClient() {
 }
 
 function getUrl() {
-  const base = (() => {
-    if (typeof window !== "undefined") return "";
-    return process.env.APP_URL || "http://localhost:3000";
-  })();
-
-  return `${base}/api/trpc`;
+  if (typeof window !== "undefined") return "/api/trpc";
+  return `${process.env.APP_URL || "http://localhost:3000"}/api/trpc`;
 }
 
 export function TRPCReactProvider({ children }: Readonly<{ children: React.ReactNode }>) {
