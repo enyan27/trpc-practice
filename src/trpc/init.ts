@@ -4,11 +4,17 @@ import { headers } from "next/headers";
 import { cache } from "react";
 
 export const createTRPCContext = cache(async () => {
+  /**
+   * @see https://trpc.io/docs/server/context
+   */
   return { userId: "えななん" };
 });
 
-const t = initTRPC.context<typeof createTRPCContext>().create({
-  // transformer: superjson,
+const t = initTRPC.create({
+  /**
+   * @see https://trpc.io/docs/server/data-transformers
+   */
+  //  transformer: superjson,
 });
 
 export const createTRPCRouter = t.router;
@@ -17,8 +23,8 @@ export const createCallerFactory = t.createCallerFactory;
 
 export const baseProcedure = t.procedure;
 
-export const protectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
+export const protectedProcedure = baseProcedure.use(async ({ next }) => {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
-  return next({ ctx: { ...ctx, userId: session.user.id } });
+  return next({ ctx: { userId: session.user.id } });
 });
