@@ -5,4 +5,6 @@ export function proxy(req: Request) {
   if (!hasSession) return Response.redirect(new URL("/sign-in", req.url));
 }
 
-export const config = { matcher: ["/", "/workflows/:path*"] };
+export const config = {
+  matcher: ["/", "/workflows/:path*"]
+};
