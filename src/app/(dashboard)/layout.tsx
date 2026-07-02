@@ -17,14 +17,24 @@ import {
   SidebarTrigger
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { IconDashboard, IconSketching } from "@tabler/icons-react";
+import { authClient } from "@/lib/auth-client";
+import { IconDashboard, IconJumpRope, IconPower, IconSketching } from "@tabler/icons-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-const MENU_ITEMS = [{ href: "/", icon: IconDashboard, label: "Dashboard" }];
+const MENU_ITEMS = [
+  { href: "/", icon: IconDashboard, label: "Dashboard" },
+  { href: "/workflows", icon: IconJumpRope, label: "Workflows" }
+];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  function handleSignOut() {
+    authClient.signOut();
+    router.replace("/sign-in");
+  }
 
   return (
     <TooltipProvider>
@@ -56,7 +66,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
-          <SidebarFooter />
+          <SidebarFooter>
+            <SidebarMenuButton onClick={handleSignOut} tooltip="Sign out">
+              <IconPower />
+            </SidebarMenuButton>
+          </SidebarFooter>
           <SidebarRail />
         </Sidebar>
         <SidebarInset>
