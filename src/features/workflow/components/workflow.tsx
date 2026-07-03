@@ -6,18 +6,18 @@ import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-q
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export function WorkflowsList() {
+export function WorkflowList() {
   const trpc = useTRPC();
-  const workflows = useSuspenseQuery(trpc.workflow.getWorkflows.queryOptions());
+  const query = useSuspenseQuery(trpc.workflow.getWorkflows.queryOptions());
 
   return (
     <div className="flex-1 flex justify-center items-center">
-      <pre>{JSON.stringify(workflows.data, null, 2)}</pre>
+      <pre>{JSON.stringify(query.data, null, 2)}</pre>
     </div>
   );
 }
 
-export function WorkflowsHeader({ disabled }: { disabled?: boolean }) {
+export function WorkflowHeader({ disabled }: { disabled?: boolean }) {
   const router = useRouter();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -26,21 +26,20 @@ export function WorkflowsHeader({ disabled }: { disabled?: boolean }) {
       onSuccess: data => {
         queryClient.invalidateQueries(trpc.workflow.getWorkflows.queryOptions());
         toast.success("Workflow created");
-        router.push(`/workflows/${data.id}`);
+        router.push(`/workflow/${data.id}`);
       },
       onError: e => toast.error(e.message)
     })
   );
 
   return (
-    <EntityHeader title="Workflows" description="Create and manage your workflows" disabled={disabled} onNew={() => mutation.mutate()} newButtonLabel="New workflow" isCreating={mutation.isPending} />
+    <EntityHeader title="Workflow" description="Create and manage your workflow" disabled={disabled} onNew={() => mutation.mutate()} newButtonLabel="New workflow" isCreating={mutation.isPending} />
   );
 }
 
-export function WorkflowsContainer({ children }: { children: React.ReactNode }) {
+export function WorkflowContainer({ children }: { children: React.ReactNode }) {
   return (
-    // Todo: add search and pagination...
-    <EntityContainer header={<WorkflowsHeader />} search={<></>} pagination={<></>}>
+    <EntityContainer header={<WorkflowHeader />} search={<></>} pagination={<></>}>
       {children}
     </EntityContainer>
   );
