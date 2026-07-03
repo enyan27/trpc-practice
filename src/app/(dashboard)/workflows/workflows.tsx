@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export function WorkflowsList() {
   const trpc = useTRPC();
-  const workflows = useSuspenseQuery(trpc.workflows.getMany.queryOptions());
+  const workflows = useSuspenseQuery(trpc.workflow.getWorkflows.queryOptions());
 
   return (
     <div className="flex-1 flex justify-center items-center">
@@ -22,9 +22,9 @@ export function WorkflowsHeader({ disabled }: { disabled?: boolean }) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    trpc.workflows.create.mutationOptions({
+    trpc.workflow.create.mutationOptions({
       onSuccess: data => {
-        queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions());
+        queryClient.invalidateQueries(trpc.workflow.getWorkflows.queryOptions());
         toast.success("Workflow created");
         router.push(`/workflows/${data.id}`);
       },
