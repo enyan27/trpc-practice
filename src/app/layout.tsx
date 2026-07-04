@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 const font = Inter({ subsets: ["latin"] });
@@ -15,10 +16,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <body className={cn(font.className, "antialiased")}>
         <TRPCReactProvider>
-          <ThemeProvider>
-            {children}
-            <Toaster />
-          </ThemeProvider>
+          <NuqsAdapter>
+            <ThemeProvider>
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </NuqsAdapter>
         </TRPCReactProvider>
       </body>
     </html>
