@@ -1,11 +1,11 @@
-import { WorkflowContainer, WorkflowList } from "@/features/workflow/components/workflow";
-import { prefetchWorkflow } from "@/features/workflow/server/prefetch";
+import { WorkflowContainer, WorkflowList } from "@/features/workflows/components/workflows";
+import { prefetchWorkflows } from "@/features/workflows/server/prefetch";
 import { HydrateClient } from "@/trpc/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-export default function Workflow() {
-  prefetchWorkflow();
+export default function Workflows() {
+  prefetchWorkflows();
 
   return (
     <WorkflowContainer>

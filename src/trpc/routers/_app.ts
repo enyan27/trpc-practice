@@ -1,8 +1,8 @@
-import { workflowRouter } from "@/features/workflow/server/router";
+import { workflowsRouter } from "@/features/workflows/server/router";
 import { createTRPCRouter } from "../init";
 
 export const appRouter = createTRPCRouter({
-  workflow: workflowRouter
+  workflows: workflowsRouter
 });
 
 export type AppRouter = typeof appRouter;

@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export function WorkflowList() {
   const trpc = useTRPC();
-  const query = useSuspenseQuery(trpc.workflow.getWorkflows.queryOptions());
+  const query = useSuspenseQuery(trpc.workflows.getMany.queryOptions());
 
   return (
     <div className="flex-1 flex justify-center items-center">
@@ -22,18 +22,18 @@ export function WorkflowHeader({ disabled }: { disabled?: boolean }) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    trpc.workflow.create.mutationOptions({
+    trpc.workflows.create.mutationOptions({
       onSuccess: data => {
-        queryClient.invalidateQueries(trpc.workflow.getWorkflows.queryOptions());
+        queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions());
         toast.success("Workflow created");
-        router.push(`/workflow/${data.id}`);
+        router.push(`/workflows/${data.id}`);
       },
       onError: e => toast.error(e.message)
     })
   );
 
   return (
-    <EntityHeader title="Workflow" description="Create and manage your workflow" disabled={disabled} onNew={() => mutation.mutate()} newButtonLabel="New workflow" isCreating={mutation.isPending} />
+    <EntityHeader title="Workflows" description="Create and manage your workflows" disabled={disabled} onNew={() => mutation.mutate()} newButtonLabel="New workflow" isCreating={mutation.isPending} />
   );
 }
 

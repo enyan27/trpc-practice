@@ -6,5 +6,5 @@ export function proxy(req: Request) {
 }
 
 export const config = {
-  matcher: ["/", "/workflow/:path*"]
+  matcher: ["/", "/workflows/:path*"]
 };
