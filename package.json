@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.6",
+    "@polar-sh/better-auth": "^1.8.4",
+    "@polar-sh/sdk": "^0.48.1",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@tabler/icons-react": "^3.44.0",
