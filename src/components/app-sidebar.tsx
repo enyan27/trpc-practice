@@ -1,10 +1,19 @@
 "use client";
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from "@/components/ui/sidebar";
 import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
 import { authClient } from "@/lib/auth-client";
-import { IconCreditCard, IconFolderOpen, IconHistory, IconKey, IconLogout, IconSparkles } from "@tabler/icons-react";
-import Image from "next/image";
+import { IconCreditCard, IconFolderOpen, IconHistory, IconKey, IconLogout, IconStar } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -12,9 +21,21 @@ const menuItems = [
   {
     title: "Main",
     items: [
-      { title: "Workflows", icon: IconFolderOpen, url: "/workflows" },
-      { title: "Credentials", icon: IconKey, url: "/credentials" },
-      { title: "Executions", icon: IconHistory, url: "/executions" }
+      {
+        title: "Workflows",
+        icon: IconFolderOpen,
+        url: "/workflows"
+      },
+      {
+        title: "Credentials",
+        icon: IconKey,
+        url: "/credentials"
+      },
+      {
+        title: "Executions",
+        icon: IconHistory,
+        url: "/executions"
+      }
     ]
   }
 ];
@@ -25,13 +46,13 @@ export const AppSidebar = () => {
   const { hasActiveSubscription, isLoading } = useHasActiveSubscription();
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar>
       <SidebarHeader>
         <SidebarMenuItem>
           <SidebarMenuButton asChild className="gap-x-4 h-10 px-4">
             <Link href="/" prefetch>
-              <Image src="/favicon.ico" alt="Starfield" width={30} height={30} />
-              <span className="font-semibold text-sm">Starfield</span>
+              {/* <Image src="logo.svg" alt="" width={30} height={30} /> */}
+              <span className="font-semibold text-sm">Enanan</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -43,7 +64,12 @@ export const AppSidebar = () => {
               <SidebarMenu>
                 {group.items.map(item => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton tooltip={item.title} isActive={item.url === "/" ? pathname === "/" : pathname.startsWith(item.url)} asChild className="gap-x-4 h-10 px-4">
+                    <SidebarMenuButton
+                      tooltip={item.title}
+                      isActive={item.url === "/" ? pathname === "/" : pathname.startsWith(item.url)}
+                      asChild
+                      className="gap-x-4 h-10 px-4"
+                    >
                       <Link href={item.url} prefetch>
                         <item.icon className="size-4" />
                         <span>{item.title}</span>
@@ -60,14 +86,22 @@ export const AppSidebar = () => {
         <SidebarMenu>
           {!hasActiveSubscription && !isLoading && (
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip="Upgade to Pro" className="gap-x-4 h-10 px-4" onClick={() => authClient.checkout({ slug: "pro" })}>
-                <IconSparkles className="h-4 w-4" />
+              <SidebarMenuButton
+                tooltip="Upgade to Pro"
+                className="gap-x-4 h-10 px-4"
+                onClick={() => authClient.checkout({ slug: "monthly" })}
+              >
+                <IconStar className="h-4 w-4" />
                 <span>Upgrade to Pro</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Billing Portal" className="gap-x-4 h-10 px-4" onClick={() => authClient.customer.portal()}>
+            <SidebarMenuButton
+              tooltip="Billing Portal"
+              className="gap-x-4 h-10 px-4"
+              onClick={() => authClient.customer.portal()}
+            >
               <IconCreditCard className="h-4 w-4" />
               <span>Billing Portal</span>
             </SidebarMenuButton>

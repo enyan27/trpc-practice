@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useTransition } from "react";
 
-export function SignInForm() {
+export function LoginForm() {
   const [isPending, startTransition] = useTransition();
 
   function handleOAuth() {
@@ -15,7 +15,7 @@ export function SignInForm() {
 
   return (
     <Button onClick={handleOAuth} variant="outline" disabled={isPending}>
-      Sign in with GitHub
+      Continue with GitHub
     </Button>
   );
 }

@@ -2,7 +2,7 @@ import { PAGINATION } from "@/config/constants";
 import { prisma } from "@/lib/prisma";
 import { createTRPCRouter, premiumProcedure, protectedProcedure } from "@/trpc/init";
 import { generateSlug } from "random-word-slugs";
-import { z } from "zod";
+import z from "zod";
 
 export const workflowsRouter = createTRPCRouter({
   create: premiumProcedure.mutation(({ ctx }) => {
@@ -36,7 +36,11 @@ export const workflowsRouter = createTRPCRouter({
     .input(
       z.object({
         page: z.number().default(PAGINATION.DEFAULT_PAGE),
-        pageSize: z.number().min(PAGINATION.MIN_PAGE_SIZE).max(PAGINATION.MAX_PAGE_SIZE).default(PAGINATION.DEFAULT_PAGE_SIZE),
+        pageSize: z
+          .number()
+          .min(PAGINATION.MIN_PAGE_SIZE)
+          .max(PAGINATION.MAX_PAGE_SIZE)
+          .default(PAGINATION.DEFAULT_PAGE_SIZE),
         search: z.string().default("")
       })
     )
