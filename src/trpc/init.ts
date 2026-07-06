@@ -2,6 +2,7 @@ import { auth, polarClient } from "@/lib/auth";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { headers } from "next/headers";
 import { cache } from "react";
+import superjson from "superjson";
 
 export const createTRPCContext = cache(async () => {
   /**
@@ -10,45 +11,28 @@ export const createTRPCContext = cache(async () => {
   return { userId: "user_123" };
 });
 
-// Avoid exporting the entire t-object
-// since it's not very descriptive.
-// For instance, the use of a t variable
-// is common in i18n libraries.
 const t = initTRPC.create({
   /**
-   * @see https://trpc.io/docs/server/data-transformers
+   * @see: https://trpc.io/docs/server/data-transformers
    */
-  // transformer: superjson,
+  transformer: superjson
 });
 
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
 export const protectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  });
-
-  if (!session) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "Unathorized"
-    });
-  }
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) throw new TRPCError({ code: "UNAUTHORIZED", message: "Unathorized" });
 
   return next({ ctx: { ...ctx, auth: session } });
 });
 
 export const premiumProcedure = protectedProcedure.use(async ({ ctx, next }) => {
-  const customer = await polarClient.customers.getStateExternal({
-    externalId: ctx.auth.user.id
-  });
+  const customer = await polarClient.customers.getStateExternal({ externalId: ctx.auth.user.id });
 
   if (!customer.activeSubscriptions || customer.activeSubscriptions.length === 0) {
-    throw new TRPCError({
-      code: "FORBIDDEN",
-      message: "Active subscription required"
-    });
+    throw new TRPCError({ code: "FORBIDDEN", message: "Active subscription required" });
   }
 
   return next({ ctx: { ...ctx, customer } });
