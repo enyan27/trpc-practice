@@ -1,7 +1,5 @@
 interface PageProps {
-  params: Promise<{
-    executionId: string;
-  }>;
+  params: Promise<{ executionId: string }>;
 }
 
 const Page = async ({ params }: PageProps) => {

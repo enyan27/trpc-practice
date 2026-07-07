@@ -20,11 +20,15 @@ function getQueryClient() {
 }
 
 function getUrl() {
-  if (typeof window !== "undefined") return "/api/trpc";
-  return process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/trpc` : "http://localhost:3000/api/trpc";
+  const base = (() => {
+    if (typeof window !== "undefined") return "";
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+    return "http://localhost:3000";
+  })();
+  return `${base}/api/trpc`;
 }
 
-export function TRPCReactProvider({ children }: Readonly<{ children: React.ReactNode }>) {
+export function TRPCReactProvider(props: Readonly<{ children: React.ReactNode }>) {
   const queryClient = getQueryClient();
   const [trpcClient] = useState(() =>
     createTRPCClient<AppRouter>({
@@ -40,7 +44,7 @@ export function TRPCReactProvider({ children }: Readonly<{ children: React.React
   return (
     <QueryClientProvider client={queryClient}>
       <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
-        {children}
+        {props.children}
       </TRPCProvider>
     </QueryClientProvider>
   );

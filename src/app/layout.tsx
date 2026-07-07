@@ -9,7 +9,9 @@ import "./globals.css";
 
 const font = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = { title: { default: "⋆˙⟡♡", template: "%s | ⋆˙⟡♡" } };
+export const metadata: Metadata = {
+  title: { default: "⋆˙⟡♡", template: "%s | ⋆˙⟡♡" }
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
