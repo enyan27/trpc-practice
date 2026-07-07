@@ -9,7 +9,8 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  SidebarRail
 } from "@/components/ui/sidebar";
 import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
 import { authClient } from "@/lib/auth-client";
@@ -116,6 +117,7 @@ export const AppSidebar = () => {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>
+        <SidebarRail />
       </Sidebar>
     </TooltipProvider>
   );
