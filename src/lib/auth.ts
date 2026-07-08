@@ -22,7 +22,7 @@ export const auth = betterAuth({
       createCustomerOnSignUp: true,
       use: [
         checkout({
-          products: [{ productId: "78717864-91e6-4d31-84b0-fe59766f6baa", slug: "monthly" }],
+          products: [{ productId: "78717864-91e6-4d31-84b0-fe59766f6baa", slug: "pro" }],
           successUrl: "/",
           authenticatedUsersOnly: true
         }),
