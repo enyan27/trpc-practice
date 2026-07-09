@@ -7,6 +7,7 @@
       "dependencies": {
         "@ai-sdk/google": "^4.0.6",
         "@hookform/resolvers": "^5.4.0",
+        "@paralleldrive/cuid2": "^3.3.0",
         "@polar-sh/better-auth": "^1.8.4",
         "@polar-sh/sdk": "^0.48.1",
         "@prisma/adapter-pg": "^7.8.0",
@@ -2063,6 +2064,16 @@
       "",
       { "dependencies": { "@opentelemetry/core": "^2.0.0" }, "peerDependencies": { "@opentelemetry/api": "^1.1.0" } },
       "sha512-nwUwUU+8O8a4bnLqk6CodWeegGMEANgC94KTAhXcpGWLrW/2/hek/0ajNbjXnSOoNuCX+nteUPs46HFHhou9Xw=="
+    ],
+
+    "@paralleldrive/cuid2": [
+      "@paralleldrive/cuid2@3.3.0",
+      "",
+      {
+        "dependencies": { "@noble/hashes": "^2.0.1", "bignumber.js": "^9.3.1", "error-causes": "^3.0.2" },
+        "bin": { "cuid2": "bin/cuid2.js" }
+      },
+      "sha512-OqiFvSOF0dBSesELYY2CAMa4YINvlLpvKOz/rv6NeZEqiyttlHgv98Juwv4Ch+GrEV7IZ8jfI2VcEoYUjXXCjw=="
     ],
 
     "@pkgjs/parseargs": [
@@ -4894,6 +4905,13 @@
       "",
       {},
       "sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A=="
+    ],
+
+    "error-causes": [
+      "error-causes@3.0.2",
+      "",
+      {},
+      "sha512-i0B8zq1dHL6mM85FGoxaJnVtx6LD5nL2v0hlpGdntg5FOSyzQ46c9lmz5qx0xRS2+PWHGOHcYxGIBC5Le2dRMw=="
     ],
 
     "error-ex": [
