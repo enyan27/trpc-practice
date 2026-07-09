@@ -18,7 +18,6 @@ import {
   type Node,
   type NodeChange
 } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import { useCallback, useState } from "react";
 import { AddNodeButton } from "./add-node-button";
 
