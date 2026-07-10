@@ -24,6 +24,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "inngest": "^4.11.0",
+        "jotai": "^2.20.1",
         "lucide-react": "^1.23.0",
         "next": "^16.2.10",
         "next-themes": "^0.4.6",
@@ -5734,6 +5735,21 @@
       "",
       {},
       "sha512-YYVDInQKFJfR/xa3ojUTl8c2KoTwiL1R5Wg9YCydwH0x0B9grbzlg5HC7mMjCtUJjbQ/YnGEZIhI5tCgfTb4Hw=="
+    ],
+
+    "jotai": [
+      "jotai@2.20.1",
+      "",
+      {
+        "peerDependencies": {
+          "@babel/core": ">=7.0.0",
+          "@babel/template": ">=7.0.0",
+          "@types/react": ">=17.0.0",
+          "react": ">=17.0.0"
+        },
+        "optionalPeers": ["@babel/core", "@babel/template", "@types/react", "react"]
+      },
+      "sha512-dnuKfU/GLi8B28RRMjQ3AfoN7kfzP8o41+AX2FmITZqEMY8PHnjABq+VkEooomLwYaGjda+pgy0yFSjaHX/ZPg=="
     ],
 
     "js-tokens": [

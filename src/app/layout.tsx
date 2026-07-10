@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/client";
+import { Provider as JotaiProvider } from "jotai";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <TRPCReactProvider>
           <NuqsAdapter>
             <ThemeProvider>
-              {children}
+              <JotaiProvider>{children}</JotaiProvider>
               <Toaster />
             </ThemeProvider>
           </NuqsAdapter>
